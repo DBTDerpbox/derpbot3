@@ -1,0 +1,5 @@
+botsToken=TOKENGOESHERE
+#-? Bot's token, DO NOT SHARE!
+
+splashesPath=data/splashes.txt
+#-? Path to the splash texts, used for displaying the bot's status on load.
