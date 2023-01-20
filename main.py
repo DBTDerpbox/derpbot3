@@ -553,16 +553,16 @@ async def on_message(ctx):
         server = str(ctx.channel).replace('battle-bridge-', '')
         #Punish player
         #Mute
-        mcPunishment("Mute", "Derpbot", server, mcUsername, "none", reason)
+        mcPunishment("Mute", "Derpbot", server, mcUsername, "7d", reason)
         #Ban
-        mcPunishment("Ban-IP", "Derpbot", server, mcUsername, "30d", reason)
+        mcPunishment("Ban-IP", "Derpbot", server, mcUsername, "1m", reason)
     
     #Autoban if slur is typed in chat by a minecraft user
     blockedWords = []
     for phrase in blockedWords:
         if phrase in ctx.content.lower():
             if ctx.author.bot:
-                autoPunish(ctx, phrase, "Slur usage is strictly prohibited on this server.")
+                autoPunish(ctx, phrase, "Slur usage is strictly prohibited on this server. §lIf you continue this behavior, there will be punishments.")
                 await ctx.delete()
                 await channel.send(AutobanChatMessage)
 
