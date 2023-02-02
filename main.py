@@ -93,6 +93,7 @@ async def status(ctx):
     leb2 = requests.get(f"https://api.minetools.eu/ping/leb-2.derpbox.xyz").json()
     leb3 = requests.get(f"https://api.minetools.eu/ping/leb-3.derpbox.xyz").json()
     lebx = requests.get(f"https://api.minetools.eu/ping/test.leb.derpbox.xyz").json()
+    lebg = requests.get(f"https://api.minetools.eu/ping/germany.leb.derpbox.xyz").json()
     
     #-! EMBED START !-#
     embed = discord.Embed(
@@ -126,6 +127,11 @@ async def status(ctx):
         embed.add_field(name="LEB - Test", value='```ini\n[{ping}ms]\n```\n```yaml\n[{players}/16 online]\n```'.format(ping=lebx['latency'], players=lebx['players']['online']))
     except:  
         embed.add_field(name="LEB - Test", value='```css\n[offine(?)]\n```')
+
+    try:
+        embed.add_field(name="LEB - Germany", value='```ini\n[{ping}ms]\n```\n```yaml\n[{players}/16 online]\n```'.format(ping=lebg['latency'], players=lebg['players']['online']))
+    except:  
+        embed.add_field(name="LEB - Germany", value='```css\n[offine(?)]\n```')
     #-! EMBED END !-#
 
     await ctx.channel.send(embed=embed)
@@ -175,6 +181,7 @@ async def ip(ctx):
     DiscordChatMessage.add_field(name='LEB - 2', value='```ini\n[leb-2.derpbox.xyz]\n```', inline=False)
     DiscordChatMessage.add_field(name='LEB - 3', value='```ini\n[leb-3.derpbox.xyz]\n```', inline=False)
     DiscordChatMessage.add_field(name='LEB - Experimental', value='```ini\n[test.leb.derpbox.xyz]\n```', inline=False)
+    DiscordChatMessage.add_field(name='LEB - Germany', value='```ini\n[germany.leb.derpbox.xyz]\n```', inline=False)
     #-! EMBED END !-#
     
     await ctx.response.send_message(embed=DiscordChatMessage)
