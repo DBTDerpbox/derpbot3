@@ -545,33 +545,48 @@ async def on_message(ctx):
         await ctx.reply("The server has a CPS cap of 15, this can result in it looking like autoclicking if someone has a CPS above 15.")
 
     #Function for autobanning slurs
-    def autoPunish(ctx, phrase, reason):
-        #Set global variables
+    def autoPunish(ctx, phrase, type, reason):
+        ##Set global variables
         global mcUsername
         global channel
         global AutobanChatMessage
-        #Get channel to send log message in
+        ##Get channel to send log message in
         channel = discord.utils.get(ctx.guild.channels, name=mcAdminLogChannel)
-        #Get MC username
+        ##Get MC username
         mcUsername = str(ctx.author).replace('#0000', '')
-        #Create message for log channel
-        AutobanChatMessage = "Player `"+mcUsername+"` said a banned phrase in chat and has been automatically banned! Phrase: ||"+phrase+"||\nFull message:||"+str(ctx.content)+"||"
-        #Get server the player is in
+        ##Create message for log channel
+        #Blocked worlds
+        if type == "blockedWords":
+            AutobanChatMessage = "Player `"+mcUsername+"` said a banned phrase in chat and has been automatically banned! Phrase: ||"+phrase+"||\nFull message:||"+str(ctx.content)+"||"
+        #Meteor ""Detection""
+        if type == "meteor":
+            AutobanChatMessage = "Player `"+mcUsername+"` said the meteor fancychat phrase in chat and has been automatically banned!\nFull message:||"+str(ctx.content)+"||"
+        ##Get server the player is in
         server = str(ctx.channel).replace('battle-bridge-', '')
-        #Punish player
-        #Mute
-        mcPunishment("Mute", "Derpbot", server, mcUsername, "7d", reason)
-        #Ban
-        mcPunishment("Ban-IP", "Derpbot", server, mcUsername, "1m", reason)
+        ##Punish player
+        #Blocked words
+        if type == "blockedWords":
+            mcPunishment("Mute", "Derpbot", server, mcUsername, "7d", reason)
+            mcPunishment("Ban-IP", "Derpbot", server, mcUsername, "1m", reason)
+        #Meteor ""detection""
+        if type == "meteor":
+            mcPunishment("Ban-IP", "Derpbot", server, mcUsername, "none", reason)
     
     #Autoban if slur is typed in chat by a minecraft user
     blockedWords = []
     for phrase in blockedWords:
         if phrase in ctx.content.lower():
             if ctx.author.bot:
-                autoPunish(ctx, phrase, "Slur usage is strictly prohibited on this server. §lIf you continue this behavior, there will be punishments.")
+                autoPunish(ctx, phrase, "blockedWords", "Slur usage is strictly prohibited on this server. §lIf you continue this behavior, there will be punishments.")
                 await ctx.delete()
                 await channel.send(AutobanChatMessage)
+
+    #Autoban if the meteor fancychat phrase is said
+    if "ᴍᴇᴛᴇᴏʀ ᴏɴ ᴄʀᴀᴄᴋ!" in ctx.content.lower():
+        if ctx.author.bot:
+            autoPunish(ctx, phrase, "meteor", "Cheating")
+            await ctx.delete()
+            await channel.send(AutobanChatMessage)
 
 
 #-? Bot's status ?-#
