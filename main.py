@@ -92,7 +92,7 @@ async def status(ctx):
     await ctx.response.send_message("Checking...")
 
     botPING = round(bot.latency * 1000)
-    lem = requests.get(f"https://api.minetools.eu/ping/minigames.derpbox.xyz").json()
+    lem = requests.get(f"https://api.minetools.eu/ping/lem.derpbox.xyz").json()
     leb1 = requests.get(f"https://api.minetools.eu/ping/leb.derpbox.xyz").json()
     leb2 = requests.get(f"https://api.minetools.eu/ping/leb-2.derpbox.xyz").json()
     leb3 = requests.get(f"https://api.minetools.eu/ping/leb-3.derpbox.xyz").json()
@@ -174,13 +174,13 @@ async def discordcmd(ctx):
 @app_commands.default_permissions(read_messages=True)
 async def ip(ctx):
         
-    BridgeChatMessage = 'minigames.derpbox.xyz'
+    BridgeChatMessage = 'Server IP: lem.derpbox.xyz'
     
     #-! EMBED START !-#
     DiscordChatMessage = discord.Embed(
     colour = discord.Colour.blue()
 )
-    DiscordChatMessage.add_field(name='Menu', value='```ini\n[minigames.derpbox.xyz]\n```', inline=False)
+    DiscordChatMessage.add_field(name='Menu', value='```ini\n[lem.derpbox.xyz]\n```', inline=False)
     DiscordChatMessage.add_field(name='LEB - 1', value='```ini\n[leb.derpbox.xyz]\n```', inline=False)
     DiscordChatMessage.add_field(name='LEB - 2', value='```ini\n[leb-2.derpbox.xyz]\n```', inline=False)
     DiscordChatMessage.add_field(name='LEB - 3', value='```ini\n[leb-3.derpbox.xyz]\n```', inline=False)
