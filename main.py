@@ -146,13 +146,13 @@ async def status(ctx):
 @app_commands.default_permissions(read_messages=True)
 async def takeall(ctx):
 
-    BridgeChatMessage = 'All Versions: Double clicking on empty slots, or clicking on the large inventory slots in small inventory.\n\n1.16-1.17.1: Middle click'
+    BridgeChatMessage = 'Vanilla: Double clicking on empty slots\n\nLEMClientHelper: Middle click'
     
     #-! EMBED START !-#
     DiscordChatMessage = discord.Embed(
     colour = discord.Colour.blue()
 )
-    DiscordChatMessage.add_field(name='How to take all in-game', value='```ini\nTake all is a feature in [Legacy Edition Battle] used to take everything from a chest instantly.\n\nTo take everything in any version, you [Double click] in an [empty slot]. In older versions [1.16-1.17.1] you can simply [Middle click].\n```', inline=False)
+    DiscordChatMessage.add_field(name='How to take all in-game', value='```ini\nTake all is a feature in the [Battle Mini Game] used to take everything from a chest instantly.\n\nTo take everything in any version, you [Double click] in an [empty slot]. When using the [LEMClientHelper Mod] you can simply [Middle click].\n```', inline=False)
     #-! EMBED END !-#
     
     await ctx.response.send_message(embed=DiscordChatMessage)
@@ -530,13 +530,13 @@ async def on_message(ctx):
     if ctx.author == bot.user:
         return
 
-    BridgeChatMessage = 'All Versions: Double clicking on empty slots, or clicking on the large inventory slots in small inventory.\n\n1.16-1.17.1: Middle click'
+    BridgeChatMessage = 'Vanilla: Double clicking on empty slots\n\nLEMClientHelper: Middle click'
     
     #-! EMBED START !-#
     DiscordChatMessage = discord.Embed(
     colour = discord.Colour.blue()
 )
-    DiscordChatMessage.add_field(name='How to take all in-game', value='```ini\nTake all is a feature in [Legacy Edition Battle] used to take everything from a chest instantly.\n\nTo take everything in any version, you [Double click] in an [empty slot]. In older versions [1.16-1.17.1] you can simply [Middle click].\n```', inline=False)
+    DiscordChatMessage.add_field(name='How to take all in-game', value='```ini\nTake all is a feature in the [Battle Mini Game] used to take everything from a chest instantly.\n\nTo take everything in any version, you [Double click] in an [empty slot]. When using the [LEMClientHelper Mod] you can simply [Middle click].\n```', inline=False)
     #-! EMBED END !-#
     if ctx.content.startswith('?takeall'):
         await ctx.channel.send(embed=DiscordChatMessage)
