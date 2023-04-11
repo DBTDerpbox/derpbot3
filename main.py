@@ -71,8 +71,12 @@ async def accept(ctx: discord.Interaction, user: discord.Member):
         await ctx.response.send_message("User <@"+str(user.id)+"> has already been verified!",ephemeral=True)
     else:
         #Send message
-        await user.send("You have been verified in the [Legacy Edition Minigames] server! You now have access to channels, welcome to the community!")
-        await ctx.response.send_message(content="Verified <@"+str(user.id)+">!",ephemeral=True)
+        try:
+            await user.send("You have been verified in the [Legacy Edition Minigames] server! You now have access to channels, welcome to the community!")
+            acceptNote = ""
+        except:
+            acceptNote = "\n**Note:** I do not have permission to dm this user! Their welcome message in dms will not be displayed on their end."
+        await ctx.response.send_message(content="Verified user!"+acceptNote,ephemeral=True)
         #Set user roles
         await user.add_roles(discord.utils.get(user.guild.roles, name=role))
         await user.remove_roles(discord.utils.get(user.guild.roles, name=oldRole))
