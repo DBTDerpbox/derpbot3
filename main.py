@@ -13,7 +13,7 @@ import pytz
 token = open("data/configuration.txt", "r").readlines()[0].removeprefix("botsToken=").replace("\n", "") #-? Bot's token to login and run.
 splashes = open("data/configuration.txt", "r").readlines()[3].removeprefix("splashesPath=").replace("\n", "") #-? Path to bot's random message on load.
 lineNumber = random.randint (0, 436) #-? Change this number to how many lines there is in the splashes file.
-discordURL = "https://discord.gg/5q2zz3EdYf"
+discordURL = "https://discord.gg/cXtNz8XAua"
 sourceURL = "https://github.com/DBTDerpbox/derpbot3"
 mcAdminLogChannel = "derpbot-log"
 mainGuild = 0 #Server ID replaces 0
