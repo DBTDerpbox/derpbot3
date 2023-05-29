@@ -22,8 +22,6 @@ peteroToken = "TokenforPeterodactylHere"
 peteroURL = "URLtopannel"
 peteroMenuServer = "serverIDHere"
 peteroBattle1Server = "serverIDHere"
-peteroBattle2Server = "serverIDHere"
-peteroBattle3Server = "serverIDHere"
 peteroBattle4Server = "serverIDHere"
 #-! Config data !-#
 
@@ -261,12 +259,6 @@ def mcPunishment(punishmentType, commandSender, server, player, duration, reason
     if server == "1":
         punishmentMcServer = peteroBattle1Server
         targetServer = "Battle 1"
-    if server == "2":
-        punishmentMcServer = peteroBattle2Server
-        targetServer = "Battle 2"
-    if server == "3":
-        punishmentMcServer = peteroBattle3Server
-        targetServer = "Battle 3"
     if server == "experimental":
         punishmentMcServer = peteroBattle4Server
         targetServer = "Battle Experimental"
