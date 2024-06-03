@@ -18,15 +18,15 @@ sourceURL = "https://github.com/DBTDerpbox/derpbot3"
 mcAdminLogChannel = "derpbot-log"
 mainGuild = 0 #Server ID replaces 0
 appealGuild = 0 #Server ID replaces 0
-peteroToken = "TokenforPeterodactylHere"
-peteroURL = "URLtopannel"
-peteroMenuServer = "serverIDHere"
-peteroBattle1Server = "serverIDHere"
-peteroBattle4Server = "serverIDHere"
+pteroToken = "TokenforpterodactylHere"
+pteroURL = "URLtopannel"
+pteroMenuServer = "serverIDHere"
+pteroBattle1Server = "serverIDHere"
+pteroBattle4Server = "serverIDHere"
 #-! Config data !-#
 
-#Create a client to connect to the petero panel and authenticate with the token
-peteroAPI = PterodactylClient(peteroURL, peteroToken)
+#Create a client to connect to the ptero panel and authenticate with the token
+pteroAPI = PterodactylClient(pteroURL, pteroToken)
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -254,23 +254,23 @@ def mcPunishment(punishmentType, commandSender, server, player, duration, reason
     global mcPunishmentNote
     
     #Find what server to use
-    punishmentMcServer = peteroMenuServer #Default option
+    punishmentMcServer = pteroMenuServer #Default option
     targetServer = "Menu"
     if server == "1":
-        punishmentMcServer = peteroBattle1Server
+        punishmentMcServer = pteroBattle1Server
         targetServer = "Battle 1"
     if server == "experimental":
-        punishmentMcServer = peteroBattle4Server
+        punishmentMcServer = pteroBattle4Server
         targetServer = "Battle Experimental"
 
     #Run the command on the mc server
     isTempPunishment(duration, punishmentType) #Determine if is a temp punishment
     outputMcCommand = str.lower(punishmentCommand)+" "+player+" "+punishmentDuration+reason
-    peteroAPI.client.servers.send_console_command(punishmentMcServer, outputMcCommand) #Send command to server
+    pteroAPI.client.servers.send_console_command(punishmentMcServer, outputMcCommand) #Send command to server
     print("Sending command to server "+targetServer+": "+outputMcCommand)
 
     #Prepare the discord message
-    if punishmentMcServer == peteroMenuServer:
+    if punishmentMcServer == pteroMenuServer:
         mcPunishmentNote = "***NOTE: I do not recognize the server `"+server+"`, defaulting to Menu Server!***"
     else:
         mcPunishmentNote = ""
