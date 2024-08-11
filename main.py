@@ -584,6 +584,15 @@ async def on_message(ctx):
             await ctx.delete()
             await channel.send(AutobanChatMessage)
 
+    # I have seen these words in LEM chat before, I have truly lost my mind.
+    # One of these should probably be added to the blocked words list proper.
+    alphaWords = ["skibidi", "rizz", "sigma", "gooning"]
+    for phrase in alphaWords:
+        if phrase in ctx.content.lower():
+            if ctx.author.bot:
+                await ctx.delete()
+                await channel.send("Player "+str(ctx.author).replace('#0000', '')+" said "+phrase+" in chat, no punishment applied \nFull message:"+str(ctx.content))
+
 
 #-? Bot's status ?-#
 with open(splashes, 'r', encoding='utf-8') as file:
