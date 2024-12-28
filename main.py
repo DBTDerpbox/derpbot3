@@ -290,6 +290,63 @@ def mcPunishment(punishmentType, commandSender, server, player, duration, reason
     DiscordChatMessage.add_field(name='Server', value=targetServer, inline=False)
     #-! EMBED END !-#
 
+def mcChatDisable(commandSender, server, enabled):
+
+    #Determine what server to use
+    #Define global variables
+    global punishmentMcServer
+
+    #Find what server to use
+    punishmentMcServer = peteroMenuServer #Default option
+    targetServer = "Menu"
+    if server == "1":
+        punishmentMcServer = peteroBattle1Server
+        targetServer = "Battle 1"
+    if server == "experimental":
+        punishmentMcServer = peteroBattle4Server
+        targetServer = "Battle Experimental"
+
+    #Run the command on the mc server
+    outputMcCommand = "chatdisabler enablechat"+" "+enabled
+    if punishmentMcServer != peteroMenuServer
+        peteroAPI.client.servers.send_console_command(punishmentMcServer, outputMcCommand) #Send command to server
+        print("Sending command to server "+targetServer+": "+outputMcCommand)
+
+    #Prepare the discord message
+    if punishmentMcServer == peteroMenuServer:
+        mcPunishmentNote = "***NOTE: I do not recognize the server `"+server+"`, command not sent!***"
+    else:
+        mcPunishmentNote = ""
+    #-! EMBED START !-#
+    DiscordChatMessage = discord.Embed(
+        if enabled == true:
+            colour = discord.Colour.green(),
+        else:
+            colour = discord.Colour.red(),
+    title="Chat Status Changed"
+)
+    DiscordChatMessage.add_field(name='Moderator', value=commandSender, inline=False)
+    if enabled == true:
+        DiscordChatMessage.add_field(name='', value="Enabled", inline=False)
+    else:
+        DiscordChatMessage.add_field(name='', value="Disabled", inline=False)
+    DiscordChatMessage.add_field(name='Server', value=targetServer, inline=False)
+    #-! EMBED END !-#
+
+@tree.command(name = "mc-chatdisabler", description = "Disables Chat on a server")
+@app_commands.guilds(mainGuild)
+@app_commands.default_permissions(ban_members=True)
+@app_commands.describe(server="The server to target (If none selected, fails)", enabled="Enable/Disable Chat")
+async def mcdisablechat(ctx: discord.Interaction, server: str, enabled: bool):
+
+    #Do all the hard work
+    mcChatDisable(ctx.user, server, enabled)
+
+    #Send message in discordprefix
+    await ctx.response.send_message(content=mcPunishmentNote,embed=DiscordChatMessage,ephemeral=True)
+    channel = discord.utils.get(ctx.user.guild.channels, name=mcAdminLogChannel)
+    await channel.send(embed=DiscordChatMessage)
+    
 
 @tree.command(name = "mc-warn", description = "Warn a minecraft player")
 @app_commands.guilds(mainGuild)
